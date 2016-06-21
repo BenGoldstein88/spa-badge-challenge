@@ -1,3 +1,21 @@
+var clickTeacherHandler = function(){
+  $('.teacher').on('click', function(event){
+    event.preventDefault();
+    console.log(this.href);
+    // debugger;
+    $.ajax({
+      url: this.href ,
+      type: 'get',
+      success: function(response){
+        console.log(response);
+        $('#teachers-list').hide();
+      },
+      fail: function (response) {console.log('fail' + response)}
+    })
+
+  })
+}
+
 $.ready( function() {
   // Do Ajax call to spa badge
   // Parse return JSON object and print it as list items
@@ -28,11 +46,11 @@ $.ready( function() {
       });
       var html = template(context);
       $("#teachers-list").innerHTML = html;
-
+      clickTeacherHandler();
     },
     fail: function (response) {console.log('fail' + response)}
   });
 
+  // clickTeacherHandler();
 // Hide teacher index
-
 })
