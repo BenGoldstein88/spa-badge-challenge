@@ -1,19 +1,88 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <script src="js/app.js"></script>
-  <title>SPABadge</title>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="js/serialize.js"></script>
+<script src="js/miniQuery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+<script src="js/app.js"></script>
+
+
+
+<title>SPABadge</title>
 </head>
 <body>
   <div class="container">
     <div class="logo">
       <h1> SPA Badge </h1>
     </div>
-    <h1> SF Teachers </h1>
-      <ul>
-        <li><a href="#">Walker</a></li>
-        <li><a href="sample-page.html">Sample Page (to see what the badges view should look like)</a></li>
-      </ul>
+
+    <div id='teachers-list'>
+    </div>
+
+    <div id="teacher-detail">
+      <div id="teacher-header"></div>
+      <div id="teacher-badges"></div>
+    </div>
+
   </div>
 </body>
 </html>
+
+<script id='teacher-list' type="text/x-handlebars-template">
+
+  <h1> SF Teachers </h1>
+  <div>
+    {{#list teachers}}<a class='teacher' href='http://spa-badge-api.herokuapp.com/teachers/{{id}}'>{{name}}</a>{{/list}}
+  </div>
+
+</script>
+
+<script id='teacher-header-script' type="text/x-handlebars-template">
+  <div>
+    <h2>Words To Be Remembered By</h2>
+    <h3>{{teacher.name}}'s Badges</h3>
+  </div>
+</script>
+
+<script id='teacher-badges-script' type="text/x-handlebars-template">
+  {{#each teacher.badges}}
+  <div id="{{this.id}}" class="slogan">
+    <div class="body">{{this.id}} ) {{this.phrase}}</div>
+    <div class="vote-on">
+      <form action="#">
+        <input type="hidden" name="slogan_id" value={{this.id}}>
+        <input type="hidden" name="vote_type" value="up">
+        <button class="up" type="submit" name="submit">
+          <img src="img/upvote.gif" alt="upvote_image" />
+        </button>
+      </form>
+    </div>
+    <div class="vote-on">
+      <form action="#">
+        <input type="hidden" name="slogan_id" value={{this.id}}>
+        <input type="hidden" name="vote_type" value="down">
+        <button class="down" type="submit" name="submit">
+          <img src="img/downvote.gif" alt="downvote_image" />
+        </button>
+      </form>
+    </div>
+
+    <div class="points">
+      ({{this.votes}} points)
+    </div>
+  </div>
+
+  {{/each}}
+
+  <div class="add-badge">
+    <h3> Add a Badge: </h3>
+    <form id ='add-new-badge' action="http://spa-badge-api.herokuapp.com/teachers/{{teacher.id}}/badges">
+      <input type="hidden" name="teacher_id" id = "id-searcher" value="{{teacher.id}}" />
+      <input type="hidden" name="votes"  value="0" />
+      <input type="text" name="phrase" id='badge-content' value=""/>
+
+      <!-- <input type="image" src="img/add_button.png" alt="submit"/> -->
+      <input type="submit" value='Create Badge'/>
+    </form>
+  </div>
+</script>
