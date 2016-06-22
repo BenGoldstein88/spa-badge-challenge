@@ -1,3 +1,22 @@
+var showTeacherHeader = function(teacher){
+  console.log(teacher);
+
+  var target = $("#teacher-header-script");
+  var source = target.innerHTML;
+  var template = Handlebars.compile(source);
+  var context = {teacher: teacher};
+
+  var html = template(context);
+
+  $("#teacher-header").innerHTML = html;
+
+
+}
+
+// var showTeacherBadges = function(){
+
+// }
+
 var clickTeacherHandler = function(){
   $('.teacher').on('click', function(event){
     event.preventDefault();
@@ -7,8 +26,12 @@ var clickTeacherHandler = function(){
       url: this.href ,
       type: 'get',
       success: function(response){
-        console.log(response);
+        // console.log(response);
+        var teacher = JSON.parse(response.currentTarget.response);
         $('#teachers-list').hide();
+        showTeacherHeader(teacher);
+
+        // showTeacherBadges();
       },
       fail: function (response) {console.log('fail' + response)}
     })
@@ -27,11 +50,11 @@ $.ready( function() {
     success: function(response) {
       var teacherString = "<ul>"
       var teachersListJSON = response.currentTarget.response
+      console.log(teachersListJSON);
+      console.log("$$$$$")
       var teachersList = JSON.parse(teachersListJSON)
-
+      console.log(teachersList);
       var target = $("#teacher-list");
-      // var wrap = document.createElement('div')
-      // wrap.appendChild(target.cloneNode(true));
       var source = target.innerHTML;
       var template = Handlebars.compile(source);
       var context = {teachers: teachersList}
@@ -46,6 +69,7 @@ $.ready( function() {
       });
       var html = template(context);
       $("#teachers-list").innerHTML = html;
+
       clickTeacherHandler();
     },
     fail: function (response) {console.log('fail' + response)}

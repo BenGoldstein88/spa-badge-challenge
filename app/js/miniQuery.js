@@ -186,7 +186,7 @@ function getSelectorType(selector){
 
   var miniQuery = function(selector) {
     var domElement = SweetSelector.select(selector);
-    var elementLength = domElement.length
+    var elementLength = domElement.length;
 
     domElement.hide = function () {
       if (!!elementLength) {
