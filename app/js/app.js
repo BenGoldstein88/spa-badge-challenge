@@ -11,10 +11,30 @@ var newBadgeHandler = function() {
       success: function(response){
         console.log(response.currentTarget.response)
         console.log("success")
+        var teacherID = JSON.parse(response.currentTarget.response).teacher_id;
+        var teacherURL = 'http://spa-badge-api.herokuapp.com/teachers/' + teacherID
+        var type = 'GET'
+        $.ajax({
+          url: teacherURL,
+          type: type,
+          success: function(response){
+            var teacher = JSON.parse(response.currentTarget.response);
+            // $('#teachers-list').hide();
+            $('#teacher-header').innerHTML = '';
+            $('#teacher-badges').innerHTML = '';
+            showTeacherHeader(teacher);
+            showTeacherBadges(teacher);
+          },
+          fail: function(response) {
+            console.log('ERROR' + response)
+          }
+        })
+
+
       },
       fail: function (response) {console.log('fail' + response)}
     })
-})
+  })
 }
 var showTeacherHeader = function(teacher){
   var target = $("#teacher-header-script");
