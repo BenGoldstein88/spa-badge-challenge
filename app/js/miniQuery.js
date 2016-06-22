@@ -196,7 +196,6 @@ function getSelectorType(selector){
       } else {
         domElement.style.display = 'none';
       }
-
     }
 
     domElement.show = function () {
@@ -217,7 +216,6 @@ function getSelectorType(selector){
       } else {
         domElement.className += " " + newClass;
       }
-
     }
 
     domElement.removeClass = function (oldClass) {
@@ -230,7 +228,6 @@ function getSelectorType(selector){
         classList = domElement.className.split(' ');
         domElement.className = replaceClasses(classList, oldClass);
       }
-
     }
 
     domElement.on = function (eventName, behavior){
