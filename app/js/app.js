@@ -1,3 +1,15 @@
+var newBadgeHandler = function() {
+
+  $('.add-badge').on('submit', function(event) {
+
+    // LEFT OFF HERE
+    event.preventDefault();
+
+
+
+
+  })
+}
 var showTeacherHeader = function(teacher){
   var target = $("#teacher-header-script");
   var source = target.innerHTML;
@@ -14,6 +26,8 @@ var showTeacherBadges = function(teacher){
   var context = {teacher:teacher}
   var html = template(context);
   $("#teacher-badges").innerHTML = html;
+  newBadgeHandler();
+
 }
 
 var clickTeacherHandler = function(){

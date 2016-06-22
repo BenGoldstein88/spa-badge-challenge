@@ -76,10 +76,12 @@
 
   <div class="add-badge">
     <h3> Add a Badge: </h3>
-    <form action="#">
+    <form id ='add-new-badge' action="">
       <input type="hidden" name="user_id" value="{{teacher.id}}" />
-      <input type="text" name="content" />
-      <input type="image" src="img/add_button.png" alt="Add Slogan" />
+      <input type="text" name="content" id='badge-content'/>
+      <!-- <input type="image" src="img/add_button.png" alt="submit"/> -->
+      <input type="submit" name='submit' value='submit' id='add-badge-submit'/>
+
     </form>
   </div>
 
