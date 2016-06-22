@@ -11,14 +11,7 @@ var showTeacherBadges = function(teacher){
   var target = $("#teacher-badges-script");
   var source = target.innerHTML;
   var template = Handlebars.compile(source);
-  var context = {badges: teacher.badges}
-  // Handlebars.registerHelper('orderedList', function(items, options) {
-  //   var out = "<ol>";
-  //   for(var i=0, l=items.length; i<l; i++) {
-  //     out = out + "<li>" + options.fn(items[i]) + "</li>";
-  //   }
-  //   return out + "</ol>";
-  // });
+  var context = {teacher:teacher}
   var html = template(context);
   $("#teacher-badges").innerHTML = html;
 }
