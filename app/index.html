@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="js/serialize.js"></script>
 <script src="js/miniQuery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 <script src="js/app.js"></script>
@@ -40,7 +41,6 @@
   <div>
     <h2>Words To Be Remembered By</h2>
     <h3>{{teacher.name}}'s Badges</h3>
-
   </div>
 </script>
 
@@ -76,13 +76,13 @@
 
   <div class="add-badge">
     <h3> Add a Badge: </h3>
-    <form id ='add-new-badge' action="">
-      <input type="hidden" name="user_id" value="{{teacher.id}}" />
-      <input type="text" name="content" id='badge-content'/>
-      <!-- <input type="image" src="img/add_button.png" alt="submit"/> -->
-      <input type="submit" name='submit' value='submit' id='add-badge-submit'/>
+    <form id ='add-new-badge' action="http://spa-badge-api.herokuapp.com/teachers/{{teacher.id}}/badges">
+      <input type="hidden" name="teacher_id" id = "id-searcher" value="{{teacher.id}}" />
+      <input type="hidden" name="votes"  value="0" />
+      <input type="text" name="phrase" id='badge-content' value=""/>
 
+      <!-- <input type="image" src="img/add_button.png" alt="submit"/> -->
+      <input type="submit" value='Create Badge'/>
     </form>
   </div>
-
 </script>

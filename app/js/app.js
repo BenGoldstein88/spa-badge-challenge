@@ -1,14 +1,20 @@
 var newBadgeHandler = function() {
 
   $('.add-badge').on('submit', function(event) {
-
-    // LEFT OFF HERE
     event.preventDefault();
-
-
-
-
-  })
+    var newBadgeForm = $("#add-new-badge");
+    var newBadgeData = serialize(newBadgeForm);
+    var newUrl = newBadgeForm.getAttribute('action') + "?" + newBadgeData
+    $.ajax({
+      url:  newUrl,
+      type: 'POST',
+      success: function(response){
+        console.log(response.currentTarget.response)
+        console.log("success")
+      },
+      fail: function (response) {console.log('fail' + response)}
+    })
+})
 }
 var showTeacherHeader = function(teacher){
   var target = $("#teacher-header-script");
@@ -27,7 +33,6 @@ var showTeacherBadges = function(teacher){
   var html = template(context);
   $("#teacher-badges").innerHTML = html;
   newBadgeHandler();
-
 }
 
 var clickTeacherHandler = function(){
